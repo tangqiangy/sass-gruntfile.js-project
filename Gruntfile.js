@@ -11,33 +11,32 @@
 
 'use strict';
 
-module.exports = function (grunt) {
-    // Project configuration.
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        watch: {
-            sass: {
-                files: ['sass/**/*.{scss}','sass/_partials/**/*.{scss}'],
-                tasks: ['compass:dist']
-            }
-        },
-        sass: {
-            dist: {
-                files: {
-                    'stylesheets/styles.css': 'sass/styles.scss'
-                }
-            }
-        },
-        compass: {
-            dist: {
-                options: {
-                    config: 'config.rb'
-                }
-            }
-        }
+module.exports = function(grunt) {
+	// Project configuration.
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
+		compass: {
+			dist: {
+				options: {
+					config: 'config.rb'
+//						sassDir:'sass',
+//						cssDir:'css'
+				}
+			}
+		},
+		watch: {
+			options: {
+				livereload: true
+			},
+			compass: {
+				files: ['sass/**/*.scss'],
+				tasks: ['compass']
+			}
+		}
 
-    });
-    grunt.registerTask('default', ['compass:dist', 'watch']);
-    grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+	});
+	grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.registerTask('default', ['compass:dist', 'watch']);
+	
 };
